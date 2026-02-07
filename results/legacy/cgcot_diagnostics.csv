@@ -1,0 +1,4 @@
+benchmark,model,steps_total,steps_verified,steps_disagreed,steps_recovered,n,verification_rate,disagreement_rate,recovery_rate
+folio,gpt-4o-mini,403,23,21,21,100,5.7,91.3,100.0
+gsm8k,gpt-4o-mini,1179,1069,196,196,300,90.7,18.3,100.0
+math,gpt-4o-mini,591,435,230,230,100,73.6,52.9,100.0
