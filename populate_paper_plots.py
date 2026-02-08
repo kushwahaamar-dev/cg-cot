@@ -69,17 +69,28 @@ def plot_reliability_gap(df):
         "Verifier": ["Qwen-Coder (Specialist)"]
     })
     
+    # Combined dataframe
     combined = pd.concat([gap, specialist_row], ignore_index=True)
     combined["Benchmark"] = combined["benchmark"].str.upper()
     
+    # Calculate Reliability Score (100 - Crash Rate)
+    combined["Reliability Score"] = 100 - combined["crash_rate"]
+    
     plt.figure(figsize=(6, 5))
-    sns.barplot(data=combined, x="Benchmark", y="crash_rate", hue="Verifier", palette=["#D55E00", "#009E73"])
-    plt.title("The Reliability Gap: Crash Rate by Verifier")
-    plt.ylabel("Crash Rate (% of Steps)")
+    ax = sns.barplot(
+        data=combined, 
+        x="Benchmark", 
+        y="Reliability Score", 
+        hue="Verifier", 
+        palette=["#D55E00", "#009E73"]
+    )
+    plt.title("Reliability Score: Verifier Stability")
+    plt.ylabel("Reliability (% Non-Crashed Steps)")
     plt.ylim(0, 100)
+    plt.axhline(y=100, color='gray', linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig(FIG_DIR / "fig_reliability_gap.png", dpi=300)
-    print("Generated fig_reliability_gap.png")
+    print("Generated fig_reliability_gap.png (Reliability Score)")
     
 def plot_cost_vs_acc(df):
     df["correct_bool"] = df["correct"].astype(str) == "True"
