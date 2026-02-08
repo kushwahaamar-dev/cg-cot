@@ -112,11 +112,18 @@ Early smoke tests indicate that the \textbf{Logic-to-Code} debugging branch is h
     \item \textbf{Cost Trade-off:} This consensus process increases latency by $5\times$--$8\times$ compared to standard CoT, but effectively prevents the "Silent Failure" mode where code errors go unnoticed.
 \end{itemize}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\linewidth]{figures/fig_cost_accuracy.png}
+    \caption{Cost (Tokens) vs. Correctness. Correct solutions (orange) generally require more tokens due to the functioning verification loop, while silent failures (blue) often crash early, consuming fewer tokens but yielding incorrect results.}
+    \label{fig:cost_accuracy}
+\end{figure}
+
 \subsection{Quantitative Results}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\linewidth]{../figures/fig_main_results.png}
+    \includegraphics[width=1.0\linewidth]{figures/fig_main_results.png}
     \caption{Accuracy comparison across benchmarks. Symmetric CG-CoT sacrifices raw accuracy on complex tasks (MATH) due to Verifier instability but maintains competitive performance on GSM8K.}
     \label{fig:main_results}
 \end{figure}
@@ -145,8 +152,8 @@ Baseline (CoT) & 92.5\% & 45.0\% & 67.5\% \\
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\linewidth]{../figures/fig_reliability_gap.png}
-    \caption{The Reliability Gap. On GSM8K, the Recovery Rate (green) exceeds the Crash Rate (red), indicating a net positive neurosymbolic loop. On MATH and FOLIO, the high Crash Rate overwhelms the system, preventing effective recovery.}
+    \includegraphics[width=1.0\linewidth]{figures/fig_reliability_gap.png}
+    \caption{The Reliability Gap and its Solution. Generalist models (Mistral-7B) suffer high crash rates on MATH (80\%) and FOLIO (>90\%). In contrast, the Specialist Verifier (Qwen-Coder, rightmost bar) eliminates crashes entirely (0\%), bridging the gap.}
     \label{fig:reliability_gap}
 \end{figure}
 
